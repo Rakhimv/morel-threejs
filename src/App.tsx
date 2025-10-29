@@ -2,6 +2,7 @@ import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls } from "@react-three/drei";
 import { Suspense, useEffect, useState } from "react";
 import { Mushroom } from "./components/Mushroom";
+import { Loader } from "./components/Loader";
 import { AnimatePresence } from "framer-motion";
 import { motion } from "framer-motion";
 import { GiMushroomGills } from "react-icons/gi";
@@ -99,7 +100,7 @@ export default function App() {
               </motion.div>
               <button
                 onClick={handleClose}
-                className="group p-1.5 rounded-full text-white hover:text-black bg-black hover:bg-white transition-all duration-200"
+                className="group p-1.5 cursor-pointer rounded-full text-white hover:text-black bg-black hover:bg-white transition-all duration-200"
               >
                 <IoCloseSharp className="w-5 h-5" />
               </button>
@@ -188,7 +189,7 @@ export default function App() {
             >
               <ambientLight intensity={0.5} />
               <directionalLight position={[10, 10, 5]} intensity={1} castShadow shadow-mapSize={2048} />
-              <Suspense fallback={null}>
+              <Suspense fallback={<Loader />}>
                 <Mushroom handleOpenModal={handleOpenModal} />
               </Suspense>
               <OrbitControls enableZoom={false} />
@@ -197,7 +198,6 @@ export default function App() {
           </div>
         </div>
       </motion.div>
-
 
       <Link className="absolute right-[20px] bottom-[20px] cursor-pointer" to={"https://azicode.ru"}>
         <img src="/azi.svg" className="w-[30px] opacity-45 hover:opacity-100 transition-opacity" />

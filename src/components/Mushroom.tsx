@@ -1,7 +1,7 @@
 import { Html, useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
-import * as THREE from "three"
-import gsap from "gsap"
+import * as THREE from "three";
+import gsap from "gsap";
 
 export function Mushroom({ handleOpenModal }: { handleOpenModal: (index: number) => void }) {
     const { scene } = useGLTF('/models/morel.glb');
@@ -24,25 +24,26 @@ export function Mushroom({ handleOpenModal }: { handleOpenModal: (index: number)
         });
     }, []);
 
-
     const markerPositions = [
         new THREE.Vector3(-0.8, 0, 0.8),
         new THREE.Vector3(0.8, 0, 0.8),
         new THREE.Vector3(0, 0, -1),
     ];
-    return <group ref={modelRef}>
-        <primitive object={scene} scale={1} />
 
+    return (
+        <group ref={modelRef}>
+            <primitive object={scene} scale={1} />
 
-        {markerPositions.map((pos, i) => (
-            <Html key={i} position={pos} center distanceFactor={2}>
-                <div
-                    onClick={() => handleOpenModal(i)}
-                    className="w-[100px] h-[100px] border-2 border-white rounded-[50%] hover:bg-white cursor-pointer flex items-center justify-center text-mono text-white font-bold text-[50px] hover:text-black select-none"
-                >
-                    {i + 1}
-                </div>
-            </Html>
-        ))}
-    </group>;
+            {markerPositions.map((pos, i) => (
+                <Html key={i} position={pos} center distanceFactor={2}>
+                    <div
+                        onClick={() => handleOpenModal(i)}
+                        className="w-[100px] h-[100px] border-2 border-white rounded-[50%] hover:bg-white cursor-pointer flex items-center justify-center text-mono text-white font-bold transition-all active:scale-110 text-[50px] hover:text-black select-none"
+                    >
+                        {i + 1}
+                    </div>
+                </Html>
+            ))}
+        </group>
+    );
 }
